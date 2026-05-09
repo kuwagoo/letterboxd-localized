@@ -1,0 +1,43 @@
+{
+    "manifest_version":  3,
+    "name":  "Letterboxd Localized",
+    "version":  "1.0.42",
+    "description":  "Localized titles, synopsis, cast photos, streaming availability and subtitles on Letterboxd — powered by TMDB.",
+    "permissions":  [
+                        "storage"
+                    ],
+    "host_permissions":  [
+                             "https://*.letterboxd.com/*",
+                             "https://api.themoviedb.org/*"
+                         ],
+    "options_page":  "options.html",
+    "background":  {
+                       "service_worker":  "background.js"
+                   },
+    "content_scripts":  [
+                            {
+                                "matches":  [
+                                                "https://letterboxd.com/*"
+                                            ],
+                                "js":  [
+                                           "content.js"
+                                       ],
+                                "css":  [
+                                            "style.css"
+                                        ]
+                            }
+                        ],
+    "action":  {
+                   "default_popup":  "options.html",
+                   "default_icon":  {
+                                        "16":  "icon16.png",
+                                        "48":  "icon48.png",
+                                        "128":  "icon128.png"
+                                    }
+               },
+    "icons":  {
+                  "16":  "icon16.png",
+                  "48":  "icon48.png",
+                  "128":  "icon128.png"
+              }
+}

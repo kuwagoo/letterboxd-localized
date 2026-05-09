@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Letterboxd Localized</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #14181c;
+            color: #9ab;
+            width: 360px;
+            min-height: 100px;
+        }
+
+        /* HEADER */
+        .header {
+            background: #1a1f24;
+            border-bottom: 1px solid #222b33;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.3px;
+            line-height: 1;
+        }
+
+        .header-title span {
+            color: #00e054;
+        }
+
+        .header-badge {
+            margin-left: auto;
+            font-size: 0.7rem;
+            color: #456;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            background: #222b33;
+            padding: 2px 7px;
+            border-radius: 10px;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            background: #1a1f24;
+            border-bottom: 1px solid #222b33;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #678;
+            padding: 10px 0;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .tab-btn:hover {
+            color: #9ab;
+        }
+
+        .tab-btn.active {
+            color: #00e054;
+            border-bottom-color: #00e054;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* BODY */
+        .body {
+            padding: 18px;
+        }
+
+        /* DESCRIPTION BANNER */
+        .desc-banner {
+            background: #1a1f24;
+            border: 1px solid #222b33;
+            border-radius: 6px;
+            padding: 10px 13px;
+            margin-bottom: 18px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: #789;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .desc-banner svg {
+            flex-shrink: 0;
+            opacity: 0.5;
+        }
+
+        .desc-banner strong {
+            color: #01d277;
+        }
+
+        /* FORM */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #cdd;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        select,
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 9px 11px;
+            background: #1a1f24;
+            border: 1px solid #2c3440;
+            border-radius: 5px;
+            color: #dde;
+            font-family: inherit;
+            font-size: 0.88rem;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23678' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 11px center;
+            padding-right: 30px;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #00e054;
+            box-shadow: 0 0 0 2px rgba(0, 224, 84, 0.12);
+        }
+
+        input::placeholder {
+            color: #456;
+        }
+
+        /* KEY INPUT ROW */
+        .input-row {
+            position: relative;
+        }
+
+        .toggle-visibility {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #456;
+            padding: 0;
+            width: auto;
+            font-size: 0;
+            transition: color 0.15s;
+        }
+
+        .toggle-visibility:hover {
+            color: #9ab;
+            background: none;
+            transform: translateY(-50%);
+        }
+
+        .toggle-visibility:active {
+            transform: translateY(-50%) scale(0.9);
+        }
+
+        /* SAVE BUTTON */
+        .btn-save {
+            width: 100%;
+            padding: 10px;
+            background: #00e054;
+            color: #14181c;
+            border: none;
+            border-radius: 5px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: background 0.15s, transform 0.1s;
+            margin-top: 4px;
+        }
+
+        .btn-save:hover {
+            background: #00c945;
+        }
+
+        .btn-save:active {
+            transform: scale(0.98);
+        }
+
+        /* STATUS */
+        .status {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            text-align: center;
+            min-height: 18px;
+            letter-spacing: 0.2px;
+        }
+
+        .status.success {
+            color: #00e054;
+        }
+
+        .status.error {
+            color: #ff8000;
+        }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
+            border-top: 1px solid #1e252d;
+            margin: 16px 0;
+        }
+
+        .hint {
+            font-size: 0.78rem;
+            color: #456;
+            text-align: center;
+        }
+
+        .hint a {
+            color: #567;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.15s;
+        }
+
+        .hint a:hover {
+            color: #9ab;
+        }
+
+        /* HELP TAB */
+        .help-intro {
+            font-size: 0.83rem;
+            line-height: 1.55;
+            color: #789;
+            margin-bottom: 16px;
+        }
+
+        .help-intro a {
+            color: #40bcf4;
+            text-decoration: none;
+        }
+
+        .help-intro a:hover {
+            text-decoration: underline;
+        }
+
+        .step {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 11px 13px;
+            background: #1a1f24;
+            border: 1px solid #222b33;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .step-num {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #00e054;
+            color: #14181c;
+            font-size: 0.75rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .step-body {
+            flex: 1;
+        }
+
+        .step-body p {
+            font-size: 0.83rem;
+            color: #9ab;
+            line-height: 1.45;
+            margin-bottom: 5px;
+        }
+
+        .step-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-body strong {
+            color: #cdd;
+        }
+
+        .step-body a {
+            color: #40bcf4;
+            font-size: 0.8rem;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .step-body a:hover {
+            text-decoration: underline;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #1a1f24;
+            border-top: 1px solid #222b33;
+            padding: 9px 18px;
+            font-size: 0.72rem;
+            color: #345;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .footer span {
+            color: #456;
+        }
+
+        .kofi-block {
+            margin-top: 16px;
+            padding: 13px;
+            background: #1a1f24;
+            border: 1px solid #222b33;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kofi-text {
+            font-size: 0.8rem;
+            color: #678;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Reload tag */
+        .opt-reload-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            color: #567;
+            background: #1a2028;
+            border: 1px solid #2c3440;
+            border-radius: 3px;
+            padding: 0px 4px;
+            margin-left: 4px;
+            font-style: normal;
+            vertical-align: middle;
+            letter-spacing: 0.2px;
+        }
+
+        /* Cache section */
+        .opt-cache-note {
+            font-size: 0.72rem;
+            color: #456;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .btn-clear-cache {
+            background: transparent;
+            border: 1px solid #2c3440;
+            color: #678;
+            padding: 7px 12px;
+            border-radius: 5px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .btn-clear-cache:hover {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .cache-status {
+            margin-top: 8px;
+            font-size: 0.75rem;
+            min-height: 16px;
+            color: #00e054;
+        }
+
+        .cache-status.error {
+            color: #ff8000;
+        }
+
+        /* OPTIONS TAB */
+        .opt-section {
+            margin-bottom: 18px;
+        }
+
+        .opt-section-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #456;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #1e252d;
+        }
+
+        .opt-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 7px 0;
+        }
+
+        .opt-row + .opt-row {
+            border-top: 1px solid #1a2028;
+        }
+
+        .opt-label {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .opt-label-text {
+            font-size: 0.83rem;
+            color: #cdd;
+            font-weight: 600;
+        }
+
+        .opt-label-note {
+            font-size: 0.72rem;
+            color: #456;
+            font-style: italic;
+        }
+
+        /* Toggle switch */
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: #2c3440;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            left: 3px;
+            top: 3px;
+            background: #678;
+            border-radius: 50%;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .toggle input:checked + .toggle-slider {
+            background: rgba(0, 224, 84, 0.25);
+        }
+
+        .toggle input:checked + .toggle-slider::before {
+            transform: translateX(14px);
+            background: #00e054;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <img src="icon.png" class="header-logo" alt="">
+        <div class="header-title">Letterboxd <span>Localized</span></div>
+        <div class="header-badge" id="header-badge">FR</div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab-btn active" data-target="tab-settings">Settings</button>
+        <button class="tab-btn" data-target="tab-options">Options</button>
+        <button class="tab-btn" data-target="tab-help">API Help</button>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div id="tab-settings" class="tab-content active">
+        <div class="body">
+
+            <div class="desc-banner">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>Fetches localized titles &amp; overviews from <strong>TMDB</strong> and injects them on Letterboxd.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="language">Display Language</label>
+                <select id="language">
+                    <option value="ar-AE">Arabic (AR)</option>
+                    <option value="be-BY">Belarusian (BY)</option>
+                    <option value="bg-BG">Bulgarian (BG)</option>
+                    <option value="bn-BD">Bengali (BD)</option>
+                    <option value="bs-BA">Bosnian (BA)</option>
+                    <option value="ca-ES">Catalan (ES)</option>
+                    <option value="cs-CZ">Czech (CZ)</option>
+                    <option value="cy-GB">Welsh (GB)</option>
+                    <option value="da-DK">Danish (DK)</option>
+                    <option value="de-DE">German (DE)</option>
+                    <option value="el-GR">Greek (GR)</option>
+                    <option value="en-US">English (US)</option>
+                    <option value="eo-EO">Esperanto</option>
+                    <option value="es-ES">Spanish (ES)</option>
+                    <option value="es-MX">Spanish (MX)</option>
+                    <option value="et-EE">Estonian (EE)</option>
+                    <option value="eu-ES">Basque (ES)</option>
+                    <option value="fa-IR">Persian (IR)</option>
+                    <option value="fi-FI">Finnish (FI)</option>
+                    <option value="fr-FR">French (FR)</option>
+                    <option value="gl-ES">Galician (ES)</option>
+                    <option value="he-IL">Hebrew (IL)</option>
+                    <option value="hi-IN">Hindi (IN)</option>
+                    <option value="hr-HR">Croatian (HR)</option>
+                    <option value="hu-HU">Hungarian (HU)</option>
+                    <option value="id-ID">Indonesian (ID)</option>
+                    <option value="it-IT">Italian (IT)</option>
+                    <option value="ja-JP">Japanese (JP)</option>
+                    <option value="ka-GE">Georgian (GE)</option>
+                    <option value="kk-KZ">Kazakh (KZ)</option>
+                    <option value="ko-KR">Korean (KR)</option>
+                    <option value="lt-LT">Lithuanian (LT)</option>
+                    <option value="lv-LV">Latvian (LV)</option>
+                    <option value="mk-MK">Macedonian (MK)</option>
+                    <option value="ml-IN">Malayalam (IN)</option>
+                    <option value="ms-MY">Malay (MY)</option>
+                    <option value="nb-NO">Norwegian (NO)</option>
+                    <option value="nl-NL">Dutch (NL)</option>
+                    <option value="pl-PL">Polish (PL)</option>
+                    <option value="pt-BR">Portuguese (BR)</option>
+                    <option value="pt-PT">Portuguese (PT)</option>
+                    <option value="ro-RO">Romanian (RO)</option>
+                    <option value="ru-RU">Russian (RU)</option>
+                    <option value="sk-SK">Slovak (SK)</option>
+                    <option value="sl-SI">Slovenian (SI)</option>
+                    <option value="sq-AL">Albanian (AL)</option>
+                    <option value="sr-RS">Serbian (RS)</option>
+                    <option value="sv-SE">Swedish (SE)</option>
+                    <option value="ta-IN">Tamil (IN)</option>
+                    <option value="te-IN">Telugu (IN)</option>
+                    <option value="th-TH">Thai (TH)</option>
+                    <option value="tl-PH">Filipino (PH)</option>
+                    <option value="tr-TR">Turkish (TR)</option>
+                    <option value="uk-UA">Ukrainian (UA)</option>
+                    <option value="ur-PK">Urdu (PK)</option>
+                    <option value="vi-VN">Vietnamese (VN)</option>
+                    <option value="zh-CN">Chinese Simplified (CN)</option>
+                    <option value="zh-TW">Chinese Traditional (TW)</option>
+                    <option value="zu-ZA">Zulu (ZA)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="apiKey">TMDB API Key <span style="color:#456; font-weight:400; text-transform:none;">(v3 auth)</span></label>
+                <div class="input-row">
+                    <input type="password" id="apiKey" placeholder="Paste your API key here…" spellcheck="false">
+                    <button class="toggle-visibility" id="toggleKey" title="Show / hide key">
+                        <svg id="icon-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg id="icon-eye-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <button class="btn-save" id="save">Save Settings</button>
+            <div id="status" class="status"></div>
+
+            <hr class="divider">
+            <p class="hint">No API key? See the <a href="#" id="go-help">API Key Help</a> tab.</p>
+
+            <div class="kofi-block">
+                <p class="kofi-text">If you enjoy this extension, you can support its development on Ko-fi — it helps a lot!</p>
+                <a href='https://ko-fi.com/H2H01Z4RMH' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- OPTIONS TAB -->
+    <div id="tab-options" class="tab-content">
+        <div class="body">
+
+            <div class="opt-section">
+                <div class="opt-section-title">Localization</div>
+                <div class="opt-row">
+                    <div class="opt-label">
+                        <span class="opt-label-text">Localized title</span>
+                        <span class="opt-label-note">Show translated title on posters &amp; film pages <span class="opt-reload-tag">↺ posters need reload</span></span>
+                    </div>
+                    <label class="toggle"><input type="checkbox" id="opt-enableTitle"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="opt-row">
+                    <div class="opt-label">
+                        <span class="opt-label-text">Localized synopsis</span>
+                        <span class="opt-label-note">Replace the synopsis with a localized version <span class="opt-reload-tag">↺ reload</span></span>
+                    </div>
+                    <label class="toggle"><input type="checkbox" id="opt-enableSynopsis"><span class="toggle-slider"></span></label>
+                </div>
+            </div>
+
+            <div class="opt-section">
+                <div class="opt-section-title">Cast</div>
+                <div class="opt-row">
+                    <div class="opt-label">
+                        <span class="opt-label-text">Cast photo grid</span>
+                        <span class="opt-label-note">Show photos for the top 10 cast members</span>
+                    </div>
+                    <label class="toggle"><input type="checkbox" id="opt-enableCastPhotos"><span class="toggle-slider"></span></label>
+                </div>
+            </div>
+
+            <div class="opt-section">
+                <div class="opt-section-title">Streaming</div>
+                <div class="opt-row">
+                    <div class="opt-label">
+                        <span class="opt-label-text">Availability panel</span>
+                        <span class="opt-label-note">Show streaming &amp; VOD services for your region</span>
+                    </div>
+                    <label class="toggle"><input type="checkbox" id="opt-enableStreaming"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="opt-row">
+                    <div class="opt-label">
+                        <span class="opt-label-text">Hide Letterboxd panel</span>
+                        <span class="opt-label-note">Replace the default JustWatch section</span>
+                    </div>
+                    <label class="toggle"><input type="checkbox" id="opt-hideLetterboxdStreaming"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="opt-row">
+                    <div class="opt-label">
+                        <span class="opt-label-text">Localized trailer</span>
+                        <span class="opt-label-note">Show trailer link only if available in your language</span>
+                    </div>
+                    <label class="toggle"><input type="checkbox" id="opt-enableTrailer"><span class="toggle-slider"></span></label>
+                </div>
+            </div>
+
+            <div class="opt-section">
+                <div class="opt-section-title">Subtitles</div>
+                <div class="opt-row">
+                    <div class="opt-label">
+                        <span class="opt-label-text">OpenSubtitles button</span>
+                        <span class="opt-label-note">Add a subtitle search link below the watch panel</span>
+                    </div>
+                    <label class="toggle"><input type="checkbox" id="opt-enableSubtitles"><span class="toggle-slider"></span></label>
+                </div>
+            </div>
+
+            <div class="opt-section">
+                <div class="opt-section-title">Cache</div>
+                <p class="opt-cache-note">Titles: 30d · Streaming &amp; trailers: 7d · Cast: 30d</p>
+                <button class="btn-clear-cache" id="clear-cache">Clear cached data</button>
+                <div id="cache-status" class="cache-status"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- HELP TAB -->
+    <div id="tab-help" class="tab-content">
+        <div class="body">
+            <p class="help-intro">
+                This extension needs a free API key from <a href="https://www.themoviedb.org/" target="_blank">The Movie Database (TMDB)</a> to fetch localized data.
+            </p>
+
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <p>Create a free account on TMDB</p>
+                    <a href="https://www.themoviedb.org/signup" target="_blank">→ Sign up on TMDB</a>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <p>Go to your account <strong>Settings → API</strong></p>
+                    <a href="https://www.themoviedb.org/settings/api" target="_blank">→ Open API settings</a>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <p>Request a <strong>Developer</strong> key — fill the form with any URL (e.g. <code style="color:#678">localhost</code>).</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <p>Copy the <strong>API Key (v3 auth)</strong> and paste it in the <strong>Settings</strong> tab.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        Powered by <span>TMDB</span> · Data © The Movie Database
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

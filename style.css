@@ -1,0 +1,252 @@
+/* Cast photo grid */
+.loc-cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(54px, 1fr));
+    gap: 12px 8px;
+    margin-bottom: 16px;
+}
+
+.loc-cast-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.loc-cast-photo {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #2c3440;
+    display: block;
+    transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.loc-cast-card:hover .loc-cast-photo {
+    opacity: 0.85;
+    box-shadow: 0 0 0 2px #00e054;
+}
+
+.loc-cast-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #2c3440;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #678;
+    transition: box-shadow 0.15s;
+}
+
+.loc-cast-card:hover .loc-cast-placeholder {
+    box-shadow: 0 0 0 2px #00e054;
+}
+
+.loc-cast-name {
+    font-size: 0.68rem;
+    color: #9ab;
+    text-align: center;
+    line-height: 1.25;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width: 100%;
+    transition: color 0.15s;
+}
+
+.loc-cast-card:hover .loc-cast-name {
+    color: #fff;
+}
+
+.loc-cast-character {
+    font-size: 0.62rem;
+    color: #567;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    font-style: italic;
+}
+
+/* Watch providers panel */
+.loc-watch-panel {
+    margin-top: 1px;
+    padding: 15px;
+    background: #14181c;
+}
+
+.loc-watch-header {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.loc-watch-trailer {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #567;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s;
+    flex-shrink: 0;
+}
+
+.loc-watch-trailer:hover {
+    color: #00e054;
+}
+
+.loc-watch-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #678;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.loc-watch-country {
+    color: #00e054;
+    margin-left: 4px;
+}
+
+.loc-watch-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.loc-watch-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.loc-watch-type {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #456;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.loc-watch-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+    gap: 6px;
+}
+
+.loc-watch-service {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.loc-watch-service:hover {
+    opacity: 0.85;
+    box-shadow: 0 0 0 2px #00e054;
+}
+
+.loc-watch-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.loc-watch-service-name {
+    font-size: 0.6rem;
+    color: #9ab;
+    text-align: center;
+    padding: 2px 3px;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+/* Badge sur les affiches */
+.fr-title-badge {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 10px;
+    z-index: 10;
+    pointer-events: none;
+    border: 1px solid #445566;
+}
+
+/* Affichage au survol */
+.poster:hover .fr-title-badge,
+.poster-container:hover .fr-title-badge,
+.react-component.poster:hover .fr-title-badge,
+.frame:hover .fr-title-badge {
+    display: block;
+}
+
+/* Sous-titre sur la page du film (header) */
+.fr-headline-subtitle {
+    font-size: 1.1rem;
+    color: #9ab;
+    margin-top: 4px;
+    font-family: "Graphik-Regular-Web", sans-serif;
+    font-style: italic;
+}
+
+/* OpenSubtitles button */
+.loc-subtitles {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #1f2831;
+}
+
+.loc-subtitles-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #567;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: color 0.15s;
+    padding: 4px 0;
+}
+
+.loc-subtitles-btn:hover {
+    color: #9ab;
+}
+
+.loc-subtitles-btn svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+/* Sous-titre sur les pages de review */
+.review-fr-subtitle {
+    font-size: 0.8rem;
+    margin-top: -4px;
+    margin-bottom: 5px;
+    font-family: "Graphik-Regular-Web", sans-serif;
+    color: #9ab;
+    font-style: italic;
+}
