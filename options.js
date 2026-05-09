@@ -55,6 +55,7 @@ const toggleDefaults = {
     hideLetterboxdStreaming: false,
     enableSubtitles: true,
     enableTrailer: true,
+    enableWatchlistStreaming: true,
 };
 
 chrome.storage.local.get(['tmdbApiKey', 'language', ...Object.keys(toggleDefaults)], (result) => {

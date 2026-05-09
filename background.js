@@ -89,6 +89,7 @@ async function handleFetchLocalizedData(slug, imdbId = null, tmdbId = null, forc
 
         if (foundMovie) {
             const resultData = {
+                tmdbId: foundMovie.id,
                 title: foundMovie.title || foundMovie.name,
                 overview: foundMovie.overview || "",
                 lang: language,

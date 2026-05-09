@@ -18,11 +18,26 @@ const settings = {
     hideLetterboxdStreaming: false,
     enableSubtitles: true,
     enableTrailer: true,
+    enableWatchlistStreaming: true,
     language: 'fr-FR',
 };
 
+// Helper async pour sendMessage
+const sendMsg = msg => new Promise(resolve => {
+    chrome.runtime.sendMessage(msg, response => {
+        if (chrome.runtime.lastError) { resolve(null); return; }
+        resolve(response);
+    });
+});
+
 chrome.storage.local.get(Object.keys(settings), result => {
     Object.keys(settings).forEach(k => { if (result[k] !== undefined) settings[k] = result[k]; });
+    // Déclencher les icônes streaming sur la watchlist après chargement des settings
+    if (document.body.classList.contains('my-watchlist') &&
+        document.body.classList.contains('my-own-page') &&
+        settings.enableWatchlistStreaming) {
+        processWatchlistPage();
+    }
 });
 
 // onChanged garde les settings à jour si d'autres contextes modifient le storage
@@ -60,6 +75,8 @@ function applyLiveSetting(key, value) {
             show('.loc-watch-trailer', value); break;
         case 'enableSubtitles':
             show('.loc-subtitles', value); break;
+        case 'enableWatchlistStreaming':
+            show('.loc-watchlist-badge', value); break;
     }
 }
 
@@ -461,6 +478,63 @@ function processReviewHeader() {
             }
         }
     });
+}
+
+// ── Watchlist streaming icons ─────────────────────────────────────────────────
+
+async function processWatchlistPage() {
+    const items = [...document.querySelectorAll('.griditem [data-item-slug]')];
+    const BATCH = 5;
+    for (let i = 0; i < items.length; i += BATCH) {
+        await Promise.all(items.slice(i, i + BATCH).map(processWatchlistItem));
+        if (i + BATCH < items.length) await new Promise(r => setTimeout(r, 400));
+    }
+}
+
+async function processWatchlistItem(el) {
+    const slug = el.dataset.itemSlug;
+    if (!slug) return;
+
+    const poster = el.querySelector('.poster');
+    if (!poster || poster.querySelector('.loc-watchlist-badge')) return;
+
+    const titleData = await sendMsg({ action: 'fetchFrenchTitle', slug });
+    if (!titleData?.tmdbId) return;
+
+    const watchData = await sendMsg({ action: 'fetchWatchProviders', tmdbId: titleData.tmdbId });
+    if (!watchData?.results) return;
+
+    const country = settings.language.split('-')[1] || 'FR';
+    const providers = watchData.results[country]?.flatrate || [];
+    if (!providers.length) return;
+
+    buildWatchlistBadge(poster, providers);
+}
+
+function buildWatchlistBadge(posterEl, providers) {
+    if (posterEl.querySelector('.loc-watchlist-badge')) return;
+
+    const badge = document.createElement('div');
+    badge.className = 'loc-watchlist-badge';
+
+    providers.slice(0, 3).forEach(p => {
+        if (!p.logo_path) return;
+        const img = document.createElement('img');
+        img.src = `https://image.tmdb.org/t/p/w45${p.logo_path}`;
+        img.alt = p.provider_name;
+        img.title = p.provider_name;
+        img.loading = 'lazy';
+        badge.appendChild(img);
+    });
+
+    if (providers.length > 3) {
+        const more = document.createElement('span');
+        more.className = 'loc-watchlist-more';
+        more.textContent = `+${providers.length - 3}`;
+        badge.appendChild(more);
+    }
+
+    if (badge.children.length) posterEl.appendChild(badge);
 }
 
 // ── Observer ──────────────────────────────────────────────────────────────────
