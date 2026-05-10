@@ -410,23 +410,75 @@
             display: none;
         }
 
-        .kofi-block {
-            margin-top: 16px;
-            padding: 13px;
+        /* Support blocks */
+        .support-block {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
             background: #1a1f24;
             border: 1px solid #222b33;
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 10px;
         }
 
-        .kofi-text {
-            font-size: 0.8rem;
-            color: #678;
-            text-align: center;
+        .support-block--primary {
+            border-color: rgba(0, 224, 84, 0.2);
+            background: #161d1a;
+        }
+
+        .support-block-icon {
+            font-size: 1.4rem;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .support-block-body {
+            flex: 1;
+        }
+
+        .support-block-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #cdd;
+            margin-bottom: 4px;
+        }
+
+        .support-block-text {
+            font-size: 0.78rem;
+            color: #677a88;
             line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .support-btn {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: #222b33;
+            color: #9ab;
+            border: 1px solid #2c3440;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .support-btn:hover {
+            background: #2c3440;
+            color: #cdd;
+        }
+
+        .support-btn--star {
+            background: #00e054;
+            color: #14181c;
+            border-color: transparent;
+        }
+
+        .support-btn--star:hover {
+            background: #00c945;
+            color: #14181c;
         }
 
         /* Reload tag */
@@ -836,14 +888,27 @@
     <!-- SUPPORT TAB -->
     <div id="tab-support" class="tab-content">
         <div class="body">
-            <p class="help-intro" style="text-align:center; margin-bottom:20px;">
-                Letterboxd Localized is a free, independent project.<br>
-                If you find it useful, a coffee keeps the developer going!
-            </p>
-            <div class="kofi-block" style="margin-top:0">
-                <p class="kofi-text">Support the development on Ko-fi — it helps a lot and means the world!</p>
-                <a href='https://ko-fi.com/H2H01Z4RMH' target='_blank'><img height='36' style='border:0;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=6' alt='Buy Me a Coffee at ko-fi.com'></a>
+
+            <!-- Rating block -->
+            <div class="support-block support-block--primary">
+                <div class="support-block-icon">⭐</div>
+                <div class="support-block-body">
+                    <p class="support-block-title">Enjoying the extension?</p>
+                    <p class="support-block-text">A quick rating on the Chrome Web Store takes 10 seconds and helps more people discover it — it means a lot!</p>
+                    <a class="support-btn support-btn--star" href="https://chromewebstore.google.com/detail/aecmklmcnonbjfahcgelmgimoagmfnab/reviews" target="_blank">★ Rate on Chrome Web Store</a>
+                </div>
             </div>
+
+            <!-- Ko-fi block -->
+            <div class="support-block">
+                <div class="support-block-icon">☕</div>
+                <div class="support-block-body">
+                    <p class="support-block-title">Want to go further?</p>
+                    <p class="support-block-text">Letterboxd Localized is free and independent. A coffee on Ko-fi keeps development going!</p>
+                    <a class="support-btn" href="https://ko-fi.com/H2H01Z4RMH" target="_blank">Support on Ko-fi</a>
+                </div>
+            </div>
+
         </div>
     </div>
 
