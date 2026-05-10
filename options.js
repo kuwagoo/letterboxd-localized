@@ -93,6 +93,16 @@ chrome.storage.local.get(['tmdbApiKey', 'language', ...Object.keys(toggleDefault
     }
 });
 
+// Auto-save language selector
+document.getElementById('language').addEventListener('change', () => {
+    const lang = document.getElementById('language').value;
+    chrome.storage.local.set({ language: lang });
+    updateBadge(lang);
+    chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
+        if (tab?.id) chrome.tabs.sendMessage(tab.id, { action: 'applyLiveSetting', key: 'language', value: lang }).catch(() => {});
+    });
+});
+
 // Auto-save toggles + notifie le content script en live
 for (const key of Object.keys(toggleDefaults)) {
     const el = document.getElementById(`opt-${key}`);
