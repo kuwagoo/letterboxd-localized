@@ -10,12 +10,6 @@ function switchTab(targetId) {
     document.getElementById(targetId).classList.add('active');
 }
 
-// "API Key Help" shortcut link
-document.getElementById('go-help').addEventListener('click', (e) => {
-    e.preventDefault();
-    switchTab('tab-help');
-});
-
 // Toggle API key visibility
 const apiKeyInput = document.getElementById('apiKey');
 document.getElementById('toggleKey').addEventListener('click', () => {
@@ -39,12 +33,36 @@ document.getElementById('save').addEventListener('click', () => {
     }
 
     chrome.storage.local.set({ tmdbApiKey: key, language }, () => {
-        status.textContent = 'Settings saved — reload Letterboxd to apply.';
+        status.textContent = 'Saved — reload Letterboxd to apply.';
         status.className = 'status success';
         updateBadge(language);
-        setTimeout(() => { status.textContent = ''; status.className = 'status'; }, 3000);
+        // If we're in the Setup tab, switch to Options after a short delay
+        const activeSetup = document.getElementById('tab-setup')?.classList.contains('active');
+        if (activeSetup) {
+            setTimeout(() => {
+                status.textContent = '';
+                status.className = 'status';
+                switchTab('tab-options');
+            }, 1200);
+        } else {
+            setTimeout(() => { status.textContent = ''; status.className = 'status'; }, 3000);
+        }
     });
 });
+
+// Onboarding state — API key vide
+function setOnboarding(active) {
+    const hint = document.getElementById('onboarding-hint');
+    if (active) {
+        apiKeyInput.classList.add('apikey-onboarding');
+        if (hint) hint.style.display = 'block';
+    } else {
+        apiKeyInput.classList.remove('apikey-onboarding');
+        if (hint) hint.style.display = 'none';
+    }
+}
+
+apiKeyInput.addEventListener('input', () => setOnboarding(false));
 
 // Load saved settings
 const toggleDefaults = {
@@ -59,7 +77,12 @@ const toggleDefaults = {
 };
 
 chrome.storage.local.get(['tmdbApiKey', 'language', ...Object.keys(toggleDefaults)], (result) => {
-    if (result.tmdbApiKey) apiKeyInput.value = result.tmdbApiKey;
+    if (result.tmdbApiKey) {
+        apiKeyInput.value = result.tmdbApiKey;
+    } else {
+        setOnboarding(true);
+        switchTab('tab-setup');
+    }
     const lang = result.language || 'fr-FR';
     document.getElementById('language').value = lang;
     updateBadge(lang);
@@ -109,5 +132,8 @@ document.getElementById('clear-cache').addEventListener('click', () => {
 
 function updateBadge(langCode) {
     const badge = document.getElementById('header-badge');
-    if (badge) badge.textContent = langCode.split('-')[0].toUpperCase();
+    if (!badge) return;
+    const parts = langCode.split('-');
+    const country = (parts[1] || parts[0]).toUpperCase();
+    badge.textContent = [...country].map(c => String.fromCodePoint(0x1F1E6 - 65 + c.charCodeAt(0))).join('');
 }

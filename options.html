@@ -51,7 +51,7 @@
         .header-badge {
             margin-left: auto;
             font-size: 0.7rem;
-            color: #456;
+            color: #7a8a98;
             letter-spacing: 0.5px;
             font-weight: 600;
             background: #222b33;
@@ -72,11 +72,10 @@
             border: none;
             color: #678;
             padding: 10px 0;
-            font-size: 0.8rem;
-            font-weight: 700;
+            font-size: 0.82rem;
+            font-weight: 600;
             cursor: pointer;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
+            letter-spacing: 0.2px;
             border-bottom: 2px solid transparent;
             margin-bottom: -1px;
             transition: color 0.15s, border-color 0.15s;
@@ -84,6 +83,11 @@
 
         .tab-btn:hover {
             color: #9ab;
+        }
+
+        .tab-btn:focus-visible {
+            outline: 2px solid #00e054;
+            outline-offset: -2px;
         }
 
         .tab-btn.active {
@@ -145,8 +149,7 @@
             color: #cdd;
             font-weight: 600;
             font-size: 0.8rem;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
+            letter-spacing: 0.2px;
         }
 
         select,
@@ -216,7 +219,10 @@
 
         /* SAVE BUTTON */
         .btn-save {
+            display: block;
             width: 100%;
+            max-width: 280px;
+            margin: 4px auto 0;
             padding: 10px;
             background: #00e054;
             color: #14181c;
@@ -228,7 +234,6 @@
             text-transform: uppercase;
             letter-spacing: 0.8px;
             transition: background 0.15s, transform 0.1s;
-            margin-top: 4px;
         }
 
         .btn-save:hover {
@@ -359,13 +364,50 @@
             border-top: 1px solid #222b33;
             padding: 9px 18px;
             font-size: 0.72rem;
-            color: #345;
+            color: #4e5e6e;
             text-align: center;
             letter-spacing: 0.3px;
         }
 
         .footer span {
-            color: #456;
+            color: #677a88;
+        }
+
+        /* Full-page mode (clic droit → Options) */
+        @media screen and (min-width: 660px) {
+            body {
+                width: 100%;
+                background: #0c1015;
+                display: flex;
+                justify-content: center;
+                padding: 48px 20px 80px;
+                min-height: 100vh;
+            }
+            .app-wrapper {
+                width: 640px;
+                height: fit-content;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        /* Onboarding state — API key vide */
+        @keyframes pulse-border {
+            0%, 100% { box-shadow: 0 0 0 2px rgba(0, 224, 84, 0.25); }
+            50%       { box-shadow: 0 0 0 5px rgba(0, 224, 84, 0.08); }
+        }
+
+        .apikey-onboarding {
+            border-color: #00e054 !important;
+            animation: pulse-border 2s ease-in-out infinite;
+        }
+
+        .onboarding-hint {
+            font-size: 0.75rem;
+            color: #00e054;
+            margin-top: 5px;
+            display: none;
         }
 
         .kofi-block {
@@ -405,7 +447,7 @@
         /* Cache section */
         .opt-cache-note {
             font-size: 0.72rem;
-            color: #456;
+            color: #677a88;
             margin-bottom: 10px;
             font-style: italic;
         }
@@ -426,6 +468,11 @@
         .btn-clear-cache:hover {
             border-color: #ff6b6b;
             color: #ff6b6b;
+        }
+
+        .btn-clear-cache:focus-visible {
+            outline: 2px solid #00e054;
+            outline-offset: 2px;
         }
 
         .cache-status {
@@ -451,11 +498,10 @@
         }
 
         .opt-section-title {
-            font-size: 0.72rem;
+            font-size: 0.78rem;
             font-weight: 700;
-            color: #456;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
+            color: #7a8a98;
+            letter-spacing: 0.1px;
             margin-bottom: 8px;
             padding-bottom: 6px;
             border-bottom: 1px solid #1e252d;
@@ -476,6 +522,7 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
+            cursor: pointer;
         }
 
         .opt-label-text {
@@ -486,7 +533,7 @@
 
         .opt-label-note {
             font-size: 0.72rem;
-            color: #456;
+            color: #677a88;
             font-style: italic;
         }
 
@@ -539,224 +586,27 @@
 </head>
 
 <body>
+<div class="app-wrapper">
 
     <!-- HEADER -->
     <div class="header">
         <img src="icon.png" class="header-logo" alt="">
         <div class="header-title">Letterboxd <span>Localized</span></div>
-        <div class="header-badge" id="header-badge">FR</div>
+        <div class="header-badge" id="header-badge">🇫🇷</div>
     </div>
 
     <!-- TABS -->
     <div class="tabs">
-        <button class="tab-btn active" data-target="tab-settings">Settings</button>
-        <button class="tab-btn" data-target="tab-options">Options</button>
-        <button class="tab-btn" data-target="tab-help">API Help</button>
+        <button class="tab-btn active" data-target="tab-options">Options</button>
+        <button class="tab-btn" data-target="tab-setup">Setup</button>
+        <button class="tab-btn" data-target="tab-support">Support</button>
     </div>
 
-    <!-- SETTINGS TAB -->
-    <div id="tab-settings" class="tab-content active">
-        <div class="body">
-
-            <div class="desc-banner">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0">
-                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-                </svg>
-                <span>Fetches localized titles &amp; overviews from <strong>TMDB</strong> and injects them on Letterboxd.</span>
-            </div>
-
-            <div class="settings-row">
-                <div class="form-group">
-                    <label for="language">Display Language</label>
-                    <select id="language">
-                        <option value="ar-AE">Arabic (AR)</option>
-                        <option value="be-BY">Belarusian (BY)</option>
-                        <option value="bg-BG">Bulgarian (BG)</option>
-                        <option value="bn-BD">Bengali (BD)</option>
-                        <option value="bs-BA">Bosnian (BA)</option>
-                        <option value="ca-ES">Catalan (ES)</option>
-                        <option value="cs-CZ">Czech (CZ)</option>
-                        <option value="cy-GB">Welsh (GB)</option>
-                        <option value="da-DK">Danish (DK)</option>
-                        <option value="de-DE">German (DE)</option>
-                        <option value="el-GR">Greek (GR)</option>
-                        <option value="en-US">English (US)</option>
-                        <option value="eo-EO">Esperanto</option>
-                        <option value="es-ES">Spanish (ES)</option>
-                        <option value="es-MX">Spanish (MX)</option>
-                        <option value="et-EE">Estonian (EE)</option>
-                        <option value="eu-ES">Basque (ES)</option>
-                        <option value="fa-IR">Persian (IR)</option>
-                        <option value="fi-FI">Finnish (FI)</option>
-                        <option value="fr-FR">French (FR)</option>
-                        <option value="gl-ES">Galician (ES)</option>
-                        <option value="he-IL">Hebrew (IL)</option>
-                        <option value="hi-IN">Hindi (IN)</option>
-                        <option value="hr-HR">Croatian (HR)</option>
-                        <option value="hu-HU">Hungarian (HU)</option>
-                        <option value="id-ID">Indonesian (ID)</option>
-                        <option value="it-IT">Italian (IT)</option>
-                        <option value="ja-JP">Japanese (JP)</option>
-                        <option value="ka-GE">Georgian (GE)</option>
-                        <option value="kk-KZ">Kazakh (KZ)</option>
-                        <option value="ko-KR">Korean (KR)</option>
-                        <option value="lt-LT">Lithuanian (LT)</option>
-                        <option value="lv-LV">Latvian (LV)</option>
-                        <option value="mk-MK">Macedonian (MK)</option>
-                        <option value="ml-IN">Malayalam (IN)</option>
-                        <option value="ms-MY">Malay (MY)</option>
-                        <option value="nb-NO">Norwegian (NO)</option>
-                        <option value="nl-NL">Dutch (NL)</option>
-                        <option value="pl-PL">Polish (PL)</option>
-                        <option value="pt-BR">Portuguese (BR)</option>
-                        <option value="pt-PT">Portuguese (PT)</option>
-                        <option value="ro-RO">Romanian (RO)</option>
-                        <option value="ru-RU">Russian (RU)</option>
-                        <option value="sk-SK">Slovak (SK)</option>
-                        <option value="sl-SI">Slovenian (SI)</option>
-                        <option value="sq-AL">Albanian (AL)</option>
-                        <option value="sr-RS">Serbian (RS)</option>
-                        <option value="sv-SE">Swedish (SE)</option>
-                        <option value="ta-IN">Tamil (IN)</option>
-                        <option value="te-IN">Telugu (IN)</option>
-                        <option value="th-TH">Thai (TH)</option>
-                        <option value="tl-PH">Filipino (PH)</option>
-                        <option value="tr-TR">Turkish (TR)</option>
-                        <option value="uk-UA">Ukrainian (UA)</option>
-                        <option value="ur-PK">Urdu (PK)</option>
-                        <option value="vi-VN">Vietnamese (VN)</option>
-                        <option value="zh-CN">Chinese Simplified (CN)</option>
-                        <option value="zh-TW">Chinese Traditional (TW)</option>
-                        <option value="zu-ZA">Zulu (ZA)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="apiKey">TMDB API Key <span style="color:#456; font-weight:400; text-transform:none;">(v3 auth) · <a href="#" id="go-help" style="color:#567; font-weight:600; text-decoration:underline; text-underline-offset:2px;">No key?</a></span></label>
-                    <div class="input-row">
-                        <input type="password" id="apiKey" placeholder="Paste your API key here…" spellcheck="false">
-                        <button class="toggle-visibility" id="toggleKey" title="Show / hide key">
-                            <svg id="icon-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-                            </svg>
-                            <svg id="icon-eye-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn-save" id="save">Save Settings</button>
-            <div id="status" class="status"></div>
-
-            <div class="kofi-block">
-                <p class="kofi-text">If you enjoy this extension, you can support its development on Ko-fi — it helps a lot!</p>
-                <a href='https://ko-fi.com/H2H01Z4RMH' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- OPTIONS TAB -->
-    <div id="tab-options" class="tab-content">
-        <div class="body">
-            <div class="opt-grid">
-
-                <!-- Colonne gauche -->
-                <div>
-                    <div class="opt-section">
-                        <div class="opt-section-title">Localization</div>
-                        <div class="opt-row">
-                            <div class="opt-label">
-                                <span class="opt-label-text">Localized title</span>
-                                <span class="opt-label-note">Show translated title on posters &amp; film pages <span class="opt-reload-tag">↺ reload</span></span>
-                            </div>
-                            <label class="toggle"><input type="checkbox" id="opt-enableTitle"><span class="toggle-slider"></span></label>
-                        </div>
-                        <div class="opt-row">
-                            <div class="opt-label">
-                                <span class="opt-label-text">Localized synopsis</span>
-                                <span class="opt-label-note">Replace the synopsis with a localized version <span class="opt-reload-tag">↺ reload</span></span>
-                            </div>
-                            <label class="toggle"><input type="checkbox" id="opt-enableSynopsis"><span class="toggle-slider"></span></label>
-                        </div>
-                    </div>
-
-                    <div class="opt-section">
-                        <div class="opt-section-title">Cast</div>
-                        <div class="opt-row">
-                            <div class="opt-label">
-                                <span class="opt-label-text">Cast photo grid</span>
-                                <span class="opt-label-note">Show photos for the top 10 cast members</span>
-                            </div>
-                            <label class="toggle"><input type="checkbox" id="opt-enableCastPhotos"><span class="toggle-slider"></span></label>
-                        </div>
-                    </div>
-
-                    <div class="opt-section">
-                        <div class="opt-section-title">Subtitles</div>
-                        <div class="opt-row">
-                            <div class="opt-label">
-                                <span class="opt-label-text">OpenSubtitles button</span>
-                                <span class="opt-label-note">Add a subtitle search link below the watch panel</span>
-                            </div>
-                            <label class="toggle"><input type="checkbox" id="opt-enableSubtitles"><span class="toggle-slider"></span></label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Colonne droite -->
-                <div>
-                    <div class="opt-section">
-                        <div class="opt-section-title">Streaming</div>
-                        <div class="opt-row">
-                            <div class="opt-label">
-                                <span class="opt-label-text">Availability panel</span>
-                                <span class="opt-label-note">Show streaming &amp; VOD services for your region</span>
-                            </div>
-                            <label class="toggle"><input type="checkbox" id="opt-enableStreaming"><span class="toggle-slider"></span></label>
-                        </div>
-                        <div class="opt-row">
-                            <div class="opt-label">
-                                <span class="opt-label-text">Hide Letterboxd panel</span>
-                                <span class="opt-label-note">Replace the default JustWatch section</span>
-                            </div>
-                            <label class="toggle"><input type="checkbox" id="opt-hideLetterboxdStreaming"><span class="toggle-slider"></span></label>
-                        </div>
-                        <div class="opt-row">
-                            <div class="opt-label">
-                                <span class="opt-label-text">Localized trailer</span>
-                                <span class="opt-label-note">Show trailer link only if available in your language</span>
-                            </div>
-                            <label class="toggle"><input type="checkbox" id="opt-enableTrailer"><span class="toggle-slider"></span></label>
-                        </div>
-                        <div class="opt-row">
-                            <div class="opt-label">
-                                <span class="opt-label-text">Watchlist icons</span>
-                                <span class="opt-label-note">Show streaming icons on your watchlist posters <span class="opt-reload-tag">↺ reload</span></span>
-                            </div>
-                            <label class="toggle"><input type="checkbox" id="opt-enableWatchlistStreaming"><span class="toggle-slider"></span></label>
-                        </div>
-                    </div>
-
-                    <div class="opt-section">
-                        <div class="opt-section-title">Cache</div>
-                        <p class="opt-cache-note">Titles: 30d · Streaming &amp; trailers: 7d · Cast: 30d</p>
-                        <button class="btn-clear-cache" id="clear-cache">Clear cached data</button>
-                        <div id="cache-status" class="cache-status"></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- HELP TAB -->
-    <div id="tab-help" class="tab-content">
+    <!-- SETUP TAB -->
+    <div id="tab-setup" class="tab-content">
         <div class="body">
             <p class="help-intro">
-                This extension needs a free API key from <a href="https://www.themoviedb.org/" target="_blank">The Movie Database (TMDB)</a> to fetch localized data.
+                This extension needs a free API key from <a href="https://www.themoviedb.org/" target="_blank">The Movie Database (TMDB)</a> to fetch localized titles, synopses, streaming data &amp; more.
             </p>
 
             <div class="step">
@@ -785,8 +635,194 @@
             <div class="step">
                 <div class="step-num">4</div>
                 <div class="step-body">
-                    <p>Copy the <strong>API Key (v3 auth)</strong> and paste it in the <strong>Settings</strong> tab.</p>
+                    <p>Copy the <strong>API Key (v3 auth)</strong> and paste it below:</p>
+                    <div class="input-row" style="margin-top:8px;">
+                        <input type="password" id="apiKey" placeholder="Paste your API key here…" spellcheck="false">
+                        <button class="toggle-visibility" id="toggleKey" title="Show / hide key">
+                            <svg id="icon-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            <svg id="icon-eye-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="onboarding-hint" id="onboarding-hint">👋 Paste your TMDB API key to get started</p>
+                    <button class="btn-save" id="save" style="max-width:100%;margin:10px 0 0;">Save &amp; continue →</button>
+                    <div id="status" class="status" style="text-align:left;"></div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTIONS TAB (default) -->
+    <div id="tab-options" class="tab-content active">
+        <div class="body">
+            <div class="form-group" style="margin-bottom:16px; max-width:280px;">
+                <label for="language">Display language</label>
+                <select id="language">
+                    <option value="ar-AE">Arabic (AR)</option>
+                    <option value="be-BY">Belarusian (BY)</option>
+                    <option value="bg-BG">Bulgarian (BG)</option>
+                    <option value="bn-BD">Bengali (BD)</option>
+                    <option value="bs-BA">Bosnian (BA)</option>
+                    <option value="ca-ES">Catalan (ES)</option>
+                    <option value="cs-CZ">Czech (CZ)</option>
+                    <option value="cy-GB">Welsh (GB)</option>
+                    <option value="da-DK">Danish (DK)</option>
+                    <option value="de-DE">German (DE)</option>
+                    <option value="el-GR">Greek (GR)</option>
+                    <option value="en-US">English (US)</option>
+                    <option value="eo-EO">Esperanto</option>
+                    <option value="es-ES">Spanish (ES)</option>
+                    <option value="es-MX">Spanish (MX)</option>
+                    <option value="et-EE">Estonian (EE)</option>
+                    <option value="eu-ES">Basque (ES)</option>
+                    <option value="fa-IR">Persian (IR)</option>
+                    <option value="fi-FI">Finnish (FI)</option>
+                    <option value="fr-FR">French (FR)</option>
+                    <option value="gl-ES">Galician (ES)</option>
+                    <option value="he-IL">Hebrew (IL)</option>
+                    <option value="hi-IN">Hindi (IN)</option>
+                    <option value="hr-HR">Croatian (HR)</option>
+                    <option value="hu-HU">Hungarian (HU)</option>
+                    <option value="id-ID">Indonesian (ID)</option>
+                    <option value="it-IT">Italian (IT)</option>
+                    <option value="ja-JP">Japanese (JP)</option>
+                    <option value="ka-GE">Georgian (GE)</option>
+                    <option value="kk-KZ">Kazakh (KZ)</option>
+                    <option value="ko-KR">Korean (KR)</option>
+                    <option value="lt-LT">Lithuanian (LT)</option>
+                    <option value="lv-LV">Latvian (LV)</option>
+                    <option value="mk-MK">Macedonian (MK)</option>
+                    <option value="ml-IN">Malayalam (IN)</option>
+                    <option value="ms-MY">Malay (MY)</option>
+                    <option value="nb-NO">Norwegian (NO)</option>
+                    <option value="nl-NL">Dutch (NL)</option>
+                    <option value="pl-PL">Polish (PL)</option>
+                    <option value="pt-BR">Portuguese (BR)</option>
+                    <option value="pt-PT">Portuguese (PT)</option>
+                    <option value="ro-RO">Romanian (RO)</option>
+                    <option value="ru-RU">Russian (RU)</option>
+                    <option value="sk-SK">Slovak (SK)</option>
+                    <option value="sl-SI">Slovenian (SI)</option>
+                    <option value="sq-AL">Albanian (AL)</option>
+                    <option value="sr-RS">Serbian (RS)</option>
+                    <option value="sv-SE">Swedish (SE)</option>
+                    <option value="ta-IN">Tamil (IN)</option>
+                    <option value="te-IN">Telugu (IN)</option>
+                    <option value="th-TH">Thai (TH)</option>
+                    <option value="tl-PH">Filipino (PH)</option>
+                    <option value="tr-TR">Turkish (TR)</option>
+                    <option value="uk-UA">Ukrainian (UA)</option>
+                    <option value="ur-PK">Urdu (PK)</option>
+                    <option value="vi-VN">Vietnamese (VN)</option>
+                    <option value="zh-CN">Chinese Simplified (CN)</option>
+                    <option value="zh-TW">Chinese Traditional (TW)</option>
+                    <option value="zu-ZA">Zulu (ZA)</option>
+                </select>
+            </div>
+            <div class="opt-grid">
+
+                <!-- Colonne gauche -->
+                <div>
+                    <div class="opt-section">
+                        <div class="opt-section-title">Localization</div>
+                        <div class="opt-row">
+                            <label class="opt-label" for="opt-enableTitle">
+                                <span class="opt-label-text">Localized title</span>
+                                <span class="opt-label-note">Show translated title on posters &amp; film pages <span class="opt-reload-tag">↺ reload</span></span>
+                            </label>
+                            <label class="toggle"><input type="checkbox" id="opt-enableTitle"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="opt-row">
+                            <label class="opt-label" for="opt-enableSynopsis">
+                                <span class="opt-label-text">Localized synopsis</span>
+                                <span class="opt-label-note">Replace the synopsis with a localized version <span class="opt-reload-tag">↺ reload</span></span>
+                            </label>
+                            <label class="toggle"><input type="checkbox" id="opt-enableSynopsis"><span class="toggle-slider"></span></label>
+                        </div>
+                    </div>
+
+                    <div class="opt-section">
+                        <div class="opt-section-title">Cast</div>
+                        <div class="opt-row">
+                            <label class="opt-label" for="opt-enableCastPhotos">
+                                <span class="opt-label-text">Cast photo grid</span>
+                                <span class="opt-label-note">Show photos for the top 10 cast members</span>
+                            </label>
+                            <label class="toggle"><input type="checkbox" id="opt-enableCastPhotos"><span class="toggle-slider"></span></label>
+                        </div>
+                    </div>
+
+                    <div class="opt-section">
+                        <div class="opt-section-title">Subtitles</div>
+                        <div class="opt-row">
+                            <label class="opt-label" for="opt-enableSubtitles">
+                                <span class="opt-label-text">OpenSubtitles button</span>
+                                <span class="opt-label-note">Add a subtitle search link below the watch panel</span>
+                            </label>
+                            <label class="toggle"><input type="checkbox" id="opt-enableSubtitles"><span class="toggle-slider"></span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne droite -->
+                <div>
+                    <div class="opt-section">
+                        <div class="opt-section-title">Streaming</div>
+                        <div class="opt-row">
+                            <label class="opt-label" for="opt-enableStreaming">
+                                <span class="opt-label-text">Availability panel</span>
+                                <span class="opt-label-note">Show streaming &amp; VOD services for your region</span>
+                            </label>
+                            <label class="toggle"><input type="checkbox" id="opt-enableStreaming"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="opt-row">
+                            <label class="opt-label" for="opt-hideLetterboxdStreaming">
+                                <span class="opt-label-text">Hide Letterboxd panel</span>
+                                <span class="opt-label-note">Replace the default JustWatch section</span>
+                            </label>
+                            <label class="toggle"><input type="checkbox" id="opt-hideLetterboxdStreaming"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="opt-row">
+                            <label class="opt-label" for="opt-enableTrailer">
+                                <span class="opt-label-text">Localized trailer</span>
+                                <span class="opt-label-note">Show trailer link only if available in your language</span>
+                            </label>
+                            <label class="toggle"><input type="checkbox" id="opt-enableTrailer"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="opt-row">
+                            <label class="opt-label" for="opt-enableWatchlistStreaming">
+                                <span class="opt-label-text">Watchlist icons</span>
+                                <span class="opt-label-note">Show streaming icons on your watchlist posters <span class="opt-reload-tag">↺ reload</span></span>
+                            </label>
+                            <label class="toggle"><input type="checkbox" id="opt-enableWatchlistStreaming"><span class="toggle-slider"></span></label>
+                        </div>
+                    </div>
+
+                    <div class="opt-section">
+                        <div class="opt-section-title">Cache</div>
+                        <p class="opt-cache-note">Titles: 30d · Streaming &amp; trailers: 7d · Cast: 30d</p>
+                        <button class="btn-clear-cache" id="clear-cache">Clear cached data</button>
+                        <div id="cache-status" class="cache-status"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SUPPORT TAB -->
+    <div id="tab-support" class="tab-content">
+        <div class="body">
+            <p class="help-intro" style="text-align:center; margin-bottom:20px;">
+                Letterboxd Localized is a free, independent project.<br>
+                If you find it useful, a coffee keeps the developer going!
+            </p>
+            <div class="kofi-block" style="margin-top:0">
+                <p class="kofi-text">Support the development on Ko-fi — it helps a lot and means the world!</p>
+                <a href='https://ko-fi.com/H2H01Z4RMH' target='_blank'><img height='36' style='border:0;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=6' alt='Buy Me a Coffee at ko-fi.com'></a>
             </div>
         </div>
     </div>
@@ -796,7 +832,8 @@
         Powered by <span>TMDB</span> · Data © The Movie Database
     </div>
 
-    <script src="options.js"></script>
+</div><!-- /.app-wrapper -->
+<script src="options.js"></script>
 </body>
 
 </html>
