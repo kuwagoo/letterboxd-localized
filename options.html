@@ -373,6 +373,16 @@
             color: #677a88;
         }
 
+        .footer-link {
+            color: #677a88;
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-link:hover {
+            color: #9ab;
+        }
+
         /* Full-page mode (clic droit → Options) */
         @media screen and (min-width: 660px) {
             body {
@@ -913,7 +923,7 @@
 
     <!-- FOOTER -->
     <div class="footer">
-        Powered by <span>TMDB</span> · Data © The Movie Database · by <a href="https://ko-fi.com/H2H01Z4RMH" target="_blank" style="color:#677a88; text-decoration:none; transition:color 0.15s;" onmouseover="this.style.color='#9ab'" onmouseout="this.style.color='#677a88'">Kuwago</a>
+        Powered by <span>TMDB</span> · Data © The Movie Database · by <a href="https://ko-fi.com/H2H01Z4RMH" target="_blank" class="footer-link">Kuwago</a>
     </div>
 
 </div><!-- /.app-wrapper -->
