@@ -1,0 +1,10 @@
+{
+    "extName": {
+        "message": "Letterboxd Localized",
+        "description": "Nom de l'extension"
+    },
+    "extDescription": {
+        "message": "Letterboxd dans votre langue — titres localisés, synopsis, disponibilité streaming & photos du casting, propulsé par TMDB.",
+        "description": "Description de l'extension affichée dans le Chrome Web Store et le gestionnaire d'extensions"
+    }
+}

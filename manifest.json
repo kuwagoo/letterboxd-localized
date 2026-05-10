@@ -1,8 +1,9 @@
 {
     "manifest_version":  3,
-    "name":  "Letterboxd Localized",
-    "version":  "1.0.42",
-    "description":  "Localized titles, synopsis, cast photos, streaming availability and subtitles on Letterboxd — powered by TMDB.",
+    "name":  "__MSG_extName__",
+    "version":  "1.1.1",
+    "description":  "__MSG_extDescription__",
+    "default_locale":  "en",
     "permissions":  [
                         "storage"
                     ],

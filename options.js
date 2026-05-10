@@ -88,6 +88,7 @@ document.getElementById('clear-cache').addEventListener('click', () => {
     chrome.storage.local.get(null, items => {
         const cacheKeys = Object.keys(items).filter(k =>
             k.includes('_cache_v3_') ||
+            k.includes('_cache_v4_') ||
             k.startsWith('watch_v1_') ||
             k.startsWith('credits_v1_') ||
             k.startsWith('trailer_v1_')

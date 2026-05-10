@@ -39,7 +39,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 async function handleFetchLocalizedData(slug, imdbId = null, tmdbId = null, forceUpdate = false) {
     try {
         const { tmdbApiKey: apiKey, language = 'fr-FR' } = await storageGet(['tmdbApiKey', 'language']);
-        const cacheKey = `${language}_cache_v3_${slug}`;
+        const cacheKey = `${language}_cache_v4_${slug}`;
 
         const { [cacheKey]: cachedData } = await storageGet([cacheKey]);
         if (cachedData && !forceUpdate && !isExpired(cachedData, TTL.title)) return cachedData;

@@ -24,10 +24,14 @@ const settings = {
 
 // Helper async pour sendMessage
 const sendMsg = msg => new Promise(resolve => {
-    chrome.runtime.sendMessage(msg, response => {
-        if (chrome.runtime.lastError) { resolve(null); return; }
-        resolve(response);
-    });
+    try {
+        chrome.runtime.sendMessage(msg, response => {
+            if (chrome.runtime.lastError) { resolve(null); return; }
+            resolve(response);
+        });
+    } catch (e) {
+        resolve(null);
+    }
 });
 
 chrome.storage.local.get(Object.keys(settings), result => {

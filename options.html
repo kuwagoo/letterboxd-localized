@@ -15,7 +15,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background: #14181c;
             color: #9ab;
-            width: 360px;
+            width: 640px;
             min-height: 100px;
         }
 
@@ -129,6 +129,12 @@
         }
 
         /* FORM */
+        .settings-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 20px;
+        }
+
         .form-group {
             margin-bottom: 14px;
         }
@@ -434,6 +440,12 @@
         }
 
         /* OPTIONS TAB */
+        .opt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 28px;
+        }
+
         .opt-section {
             margin-bottom: 18px;
         }
@@ -553,91 +565,90 @@
                 <span>Fetches localized titles &amp; overviews from <strong>TMDB</strong> and injects them on Letterboxd.</span>
             </div>
 
-            <div class="form-group">
-                <label for="language">Display Language</label>
-                <select id="language">
-                    <option value="ar-AE">Arabic (AR)</option>
-                    <option value="be-BY">Belarusian (BY)</option>
-                    <option value="bg-BG">Bulgarian (BG)</option>
-                    <option value="bn-BD">Bengali (BD)</option>
-                    <option value="bs-BA">Bosnian (BA)</option>
-                    <option value="ca-ES">Catalan (ES)</option>
-                    <option value="cs-CZ">Czech (CZ)</option>
-                    <option value="cy-GB">Welsh (GB)</option>
-                    <option value="da-DK">Danish (DK)</option>
-                    <option value="de-DE">German (DE)</option>
-                    <option value="el-GR">Greek (GR)</option>
-                    <option value="en-US">English (US)</option>
-                    <option value="eo-EO">Esperanto</option>
-                    <option value="es-ES">Spanish (ES)</option>
-                    <option value="es-MX">Spanish (MX)</option>
-                    <option value="et-EE">Estonian (EE)</option>
-                    <option value="eu-ES">Basque (ES)</option>
-                    <option value="fa-IR">Persian (IR)</option>
-                    <option value="fi-FI">Finnish (FI)</option>
-                    <option value="fr-FR">French (FR)</option>
-                    <option value="gl-ES">Galician (ES)</option>
-                    <option value="he-IL">Hebrew (IL)</option>
-                    <option value="hi-IN">Hindi (IN)</option>
-                    <option value="hr-HR">Croatian (HR)</option>
-                    <option value="hu-HU">Hungarian (HU)</option>
-                    <option value="id-ID">Indonesian (ID)</option>
-                    <option value="it-IT">Italian (IT)</option>
-                    <option value="ja-JP">Japanese (JP)</option>
-                    <option value="ka-GE">Georgian (GE)</option>
-                    <option value="kk-KZ">Kazakh (KZ)</option>
-                    <option value="ko-KR">Korean (KR)</option>
-                    <option value="lt-LT">Lithuanian (LT)</option>
-                    <option value="lv-LV">Latvian (LV)</option>
-                    <option value="mk-MK">Macedonian (MK)</option>
-                    <option value="ml-IN">Malayalam (IN)</option>
-                    <option value="ms-MY">Malay (MY)</option>
-                    <option value="nb-NO">Norwegian (NO)</option>
-                    <option value="nl-NL">Dutch (NL)</option>
-                    <option value="pl-PL">Polish (PL)</option>
-                    <option value="pt-BR">Portuguese (BR)</option>
-                    <option value="pt-PT">Portuguese (PT)</option>
-                    <option value="ro-RO">Romanian (RO)</option>
-                    <option value="ru-RU">Russian (RU)</option>
-                    <option value="sk-SK">Slovak (SK)</option>
-                    <option value="sl-SI">Slovenian (SI)</option>
-                    <option value="sq-AL">Albanian (AL)</option>
-                    <option value="sr-RS">Serbian (RS)</option>
-                    <option value="sv-SE">Swedish (SE)</option>
-                    <option value="ta-IN">Tamil (IN)</option>
-                    <option value="te-IN">Telugu (IN)</option>
-                    <option value="th-TH">Thai (TH)</option>
-                    <option value="tl-PH">Filipino (PH)</option>
-                    <option value="tr-TR">Turkish (TR)</option>
-                    <option value="uk-UA">Ukrainian (UA)</option>
-                    <option value="ur-PK">Urdu (PK)</option>
-                    <option value="vi-VN">Vietnamese (VN)</option>
-                    <option value="zh-CN">Chinese Simplified (CN)</option>
-                    <option value="zh-TW">Chinese Traditional (TW)</option>
-                    <option value="zu-ZA">Zulu (ZA)</option>
-                </select>
-            </div>
+            <div class="settings-row">
+                <div class="form-group">
+                    <label for="language">Display Language</label>
+                    <select id="language">
+                        <option value="ar-AE">Arabic (AR)</option>
+                        <option value="be-BY">Belarusian (BY)</option>
+                        <option value="bg-BG">Bulgarian (BG)</option>
+                        <option value="bn-BD">Bengali (BD)</option>
+                        <option value="bs-BA">Bosnian (BA)</option>
+                        <option value="ca-ES">Catalan (ES)</option>
+                        <option value="cs-CZ">Czech (CZ)</option>
+                        <option value="cy-GB">Welsh (GB)</option>
+                        <option value="da-DK">Danish (DK)</option>
+                        <option value="de-DE">German (DE)</option>
+                        <option value="el-GR">Greek (GR)</option>
+                        <option value="en-US">English (US)</option>
+                        <option value="eo-EO">Esperanto</option>
+                        <option value="es-ES">Spanish (ES)</option>
+                        <option value="es-MX">Spanish (MX)</option>
+                        <option value="et-EE">Estonian (EE)</option>
+                        <option value="eu-ES">Basque (ES)</option>
+                        <option value="fa-IR">Persian (IR)</option>
+                        <option value="fi-FI">Finnish (FI)</option>
+                        <option value="fr-FR">French (FR)</option>
+                        <option value="gl-ES">Galician (ES)</option>
+                        <option value="he-IL">Hebrew (IL)</option>
+                        <option value="hi-IN">Hindi (IN)</option>
+                        <option value="hr-HR">Croatian (HR)</option>
+                        <option value="hu-HU">Hungarian (HU)</option>
+                        <option value="id-ID">Indonesian (ID)</option>
+                        <option value="it-IT">Italian (IT)</option>
+                        <option value="ja-JP">Japanese (JP)</option>
+                        <option value="ka-GE">Georgian (GE)</option>
+                        <option value="kk-KZ">Kazakh (KZ)</option>
+                        <option value="ko-KR">Korean (KR)</option>
+                        <option value="lt-LT">Lithuanian (LT)</option>
+                        <option value="lv-LV">Latvian (LV)</option>
+                        <option value="mk-MK">Macedonian (MK)</option>
+                        <option value="ml-IN">Malayalam (IN)</option>
+                        <option value="ms-MY">Malay (MY)</option>
+                        <option value="nb-NO">Norwegian (NO)</option>
+                        <option value="nl-NL">Dutch (NL)</option>
+                        <option value="pl-PL">Polish (PL)</option>
+                        <option value="pt-BR">Portuguese (BR)</option>
+                        <option value="pt-PT">Portuguese (PT)</option>
+                        <option value="ro-RO">Romanian (RO)</option>
+                        <option value="ru-RU">Russian (RU)</option>
+                        <option value="sk-SK">Slovak (SK)</option>
+                        <option value="sl-SI">Slovenian (SI)</option>
+                        <option value="sq-AL">Albanian (AL)</option>
+                        <option value="sr-RS">Serbian (RS)</option>
+                        <option value="sv-SE">Swedish (SE)</option>
+                        <option value="ta-IN">Tamil (IN)</option>
+                        <option value="te-IN">Telugu (IN)</option>
+                        <option value="th-TH">Thai (TH)</option>
+                        <option value="tl-PH">Filipino (PH)</option>
+                        <option value="tr-TR">Turkish (TR)</option>
+                        <option value="uk-UA">Ukrainian (UA)</option>
+                        <option value="ur-PK">Urdu (PK)</option>
+                        <option value="vi-VN">Vietnamese (VN)</option>
+                        <option value="zh-CN">Chinese Simplified (CN)</option>
+                        <option value="zh-TW">Chinese Traditional (TW)</option>
+                        <option value="zu-ZA">Zulu (ZA)</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="apiKey">TMDB API Key <span style="color:#456; font-weight:400; text-transform:none;">(v3 auth)</span></label>
-                <div class="input-row">
-                    <input type="password" id="apiKey" placeholder="Paste your API key here…" spellcheck="false">
-                    <button class="toggle-visibility" id="toggleKey" title="Show / hide key">
-                        <svg id="icon-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-                        </svg>
-                        <svg id="icon-eye-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
-                        </svg>
-                    </button>
+                <div class="form-group">
+                    <label for="apiKey">TMDB API Key <span style="color:#456; font-weight:400; text-transform:none;">(v3 auth) · <a href="#" id="go-help" style="color:#567; font-weight:600; text-decoration:underline; text-underline-offset:2px;">No key?</a></span></label>
+                    <div class="input-row">
+                        <input type="password" id="apiKey" placeholder="Paste your API key here…" spellcheck="false">
+                        <button class="toggle-visibility" id="toggleKey" title="Show / hide key">
+                            <svg id="icon-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            <svg id="icon-eye-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <button class="btn-save" id="save">Save Settings</button>
             <div id="status" class="status"></div>
-
-            <hr class="divider">
-            <p class="hint">No API key? See the <a href="#" id="go-help">API Key Help</a> tab.</p>
 
             <div class="kofi-block">
                 <p class="kofi-text">If you enjoy this extension, you can support its development on Ko-fi — it helps a lot!</p>
@@ -650,86 +661,94 @@
     <!-- OPTIONS TAB -->
     <div id="tab-options" class="tab-content">
         <div class="body">
+            <div class="opt-grid">
 
-            <div class="opt-section">
-                <div class="opt-section-title">Localization</div>
-                <div class="opt-row">
-                    <div class="opt-label">
-                        <span class="opt-label-text">Localized title</span>
-                        <span class="opt-label-note">Show translated title on posters &amp; film pages <span class="opt-reload-tag">↺ posters need reload</span></span>
+                <!-- Colonne gauche -->
+                <div>
+                    <div class="opt-section">
+                        <div class="opt-section-title">Localization</div>
+                        <div class="opt-row">
+                            <div class="opt-label">
+                                <span class="opt-label-text">Localized title</span>
+                                <span class="opt-label-note">Show translated title on posters &amp; film pages <span class="opt-reload-tag">↺ reload</span></span>
+                            </div>
+                            <label class="toggle"><input type="checkbox" id="opt-enableTitle"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="opt-row">
+                            <div class="opt-label">
+                                <span class="opt-label-text">Localized synopsis</span>
+                                <span class="opt-label-note">Replace the synopsis with a localized version <span class="opt-reload-tag">↺ reload</span></span>
+                            </div>
+                            <label class="toggle"><input type="checkbox" id="opt-enableSynopsis"><span class="toggle-slider"></span></label>
+                        </div>
                     </div>
-                    <label class="toggle"><input type="checkbox" id="opt-enableTitle"><span class="toggle-slider"></span></label>
-                </div>
-                <div class="opt-row">
-                    <div class="opt-label">
-                        <span class="opt-label-text">Localized synopsis</span>
-                        <span class="opt-label-note">Replace the synopsis with a localized version <span class="opt-reload-tag">↺ reload</span></span>
+
+                    <div class="opt-section">
+                        <div class="opt-section-title">Cast</div>
+                        <div class="opt-row">
+                            <div class="opt-label">
+                                <span class="opt-label-text">Cast photo grid</span>
+                                <span class="opt-label-note">Show photos for the top 10 cast members</span>
+                            </div>
+                            <label class="toggle"><input type="checkbox" id="opt-enableCastPhotos"><span class="toggle-slider"></span></label>
+                        </div>
                     </div>
-                    <label class="toggle"><input type="checkbox" id="opt-enableSynopsis"><span class="toggle-slider"></span></label>
+
+                    <div class="opt-section">
+                        <div class="opt-section-title">Subtitles</div>
+                        <div class="opt-row">
+                            <div class="opt-label">
+                                <span class="opt-label-text">OpenSubtitles button</span>
+                                <span class="opt-label-note">Add a subtitle search link below the watch panel</span>
+                            </div>
+                            <label class="toggle"><input type="checkbox" id="opt-enableSubtitles"><span class="toggle-slider"></span></label>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Colonne droite -->
+                <div>
+                    <div class="opt-section">
+                        <div class="opt-section-title">Streaming</div>
+                        <div class="opt-row">
+                            <div class="opt-label">
+                                <span class="opt-label-text">Availability panel</span>
+                                <span class="opt-label-note">Show streaming &amp; VOD services for your region</span>
+                            </div>
+                            <label class="toggle"><input type="checkbox" id="opt-enableStreaming"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="opt-row">
+                            <div class="opt-label">
+                                <span class="opt-label-text">Hide Letterboxd panel</span>
+                                <span class="opt-label-note">Replace the default JustWatch section</span>
+                            </div>
+                            <label class="toggle"><input type="checkbox" id="opt-hideLetterboxdStreaming"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="opt-row">
+                            <div class="opt-label">
+                                <span class="opt-label-text">Localized trailer</span>
+                                <span class="opt-label-note">Show trailer link only if available in your language</span>
+                            </div>
+                            <label class="toggle"><input type="checkbox" id="opt-enableTrailer"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="opt-row">
+                            <div class="opt-label">
+                                <span class="opt-label-text">Watchlist icons</span>
+                                <span class="opt-label-note">Show streaming icons on your watchlist posters <span class="opt-reload-tag">↺ reload</span></span>
+                            </div>
+                            <label class="toggle"><input type="checkbox" id="opt-enableWatchlistStreaming"><span class="toggle-slider"></span></label>
+                        </div>
+                    </div>
+
+                    <div class="opt-section">
+                        <div class="opt-section-title">Cache</div>
+                        <p class="opt-cache-note">Titles: 30d · Streaming &amp; trailers: 7d · Cast: 30d</p>
+                        <button class="btn-clear-cache" id="clear-cache">Clear cached data</button>
+                        <div id="cache-status" class="cache-status"></div>
+                    </div>
+                </div>
+
             </div>
-
-            <div class="opt-section">
-                <div class="opt-section-title">Cast</div>
-                <div class="opt-row">
-                    <div class="opt-label">
-                        <span class="opt-label-text">Cast photo grid</span>
-                        <span class="opt-label-note">Show photos for the top 10 cast members</span>
-                    </div>
-                    <label class="toggle"><input type="checkbox" id="opt-enableCastPhotos"><span class="toggle-slider"></span></label>
-                </div>
-            </div>
-
-            <div class="opt-section">
-                <div class="opt-section-title">Streaming</div>
-                <div class="opt-row">
-                    <div class="opt-label">
-                        <span class="opt-label-text">Availability panel</span>
-                        <span class="opt-label-note">Show streaming &amp; VOD services for your region</span>
-                    </div>
-                    <label class="toggle"><input type="checkbox" id="opt-enableStreaming"><span class="toggle-slider"></span></label>
-                </div>
-                <div class="opt-row">
-                    <div class="opt-label">
-                        <span class="opt-label-text">Hide Letterboxd panel</span>
-                        <span class="opt-label-note">Replace the default JustWatch section</span>
-                    </div>
-                    <label class="toggle"><input type="checkbox" id="opt-hideLetterboxdStreaming"><span class="toggle-slider"></span></label>
-                </div>
-                <div class="opt-row">
-                    <div class="opt-label">
-                        <span class="opt-label-text">Localized trailer</span>
-                        <span class="opt-label-note">Show trailer link only if available in your language</span>
-                    </div>
-                    <label class="toggle"><input type="checkbox" id="opt-enableTrailer"><span class="toggle-slider"></span></label>
-                </div>
-                <div class="opt-row">
-                    <div class="opt-label">
-                        <span class="opt-label-text">Watchlist streaming icons</span>
-                        <span class="opt-label-note">Show streaming service icons on your watchlist posters <span class="opt-reload-tag">↺ reload</span></span>
-                    </div>
-                    <label class="toggle"><input type="checkbox" id="opt-enableWatchlistStreaming"><span class="toggle-slider"></span></label>
-                </div>
-            </div>
-
-            <div class="opt-section">
-                <div class="opt-section-title">Subtitles</div>
-                <div class="opt-row">
-                    <div class="opt-label">
-                        <span class="opt-label-text">OpenSubtitles button</span>
-                        <span class="opt-label-note">Add a subtitle search link below the watch panel</span>
-                    </div>
-                    <label class="toggle"><input type="checkbox" id="opt-enableSubtitles"><span class="toggle-slider"></span></label>
-                </div>
-            </div>
-
-            <div class="opt-section">
-                <div class="opt-section-title">Cache</div>
-                <p class="opt-cache-note">Titles: 30d · Streaming &amp; trailers: 7d · Cast: 30d</p>
-                <button class="btn-clear-cache" id="clear-cache">Clear cached data</button>
-                <div id="cache-status" class="cache-status"></div>
-            </div>
-
         </div>
     </div>
 
