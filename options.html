@@ -669,9 +669,11 @@
     <!-- SETUP TAB -->
     <div id="tab-setup" class="tab-content">
         <div class="body">
-            <p class="help-intro">
-                This extension needs a free API key from <a href="https://www.themoviedb.org/" target="_blank">The Movie Database (TMDB)</a> to fetch localized titles, synopses, streaming data &amp; more.
-            </p>
+            <div class="step" style="margin-bottom:10px;">
+                <div class="step-body">
+                    <p>This extension needs a free API key from <a href="https://www.themoviedb.org/" target="_blank" style="color:#40bcf4;">The Movie Database (TMDB)</a> to fetch localized titles, synopses, streaming data &amp; more.</p>
+                </div>
+            </div>
 
             <div class="step">
                 <div class="step-num">1</div>
@@ -700,7 +702,7 @@
                 <div class="step-num">4</div>
                 <div class="step-body">
                     <p>Copy the <strong>API Key (v3 auth)</strong> and paste it below:</p>
-                    <div style="display:flex;gap:8px;align-items:center;margin-top:8px;">
+                    <div style="display:flex;gap:8px;align-items:stretch;margin-top:8px;">
                         <div class="input-row" style="flex:1;">
                             <input type="password" id="apiKey" placeholder="Paste your API key here…" spellcheck="false">
                             <button class="toggle-visibility" id="toggleKey" title="Show / hide key">
@@ -712,7 +714,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <button class="btn-save" id="save" style="flex-shrink:0;width:auto;padding:7px 16px;text-transform:none;font-weight:700;background:#00c945;letter-spacing:0.2px;">Save →</button>
+                        <button class="btn-save" id="save" style="flex-shrink:0;width:auto;padding:7px 16px;text-transform:none;font-weight:700;background:#00c945;letter-spacing:0.2px;">Save & continue →</button>
                     </div>
                     <p class="onboarding-hint" id="onboarding-hint">👋 Paste your TMDB API key to get started</p>
                     <div id="status" class="status" style="text-align:left;"></div>
