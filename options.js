@@ -150,6 +150,5 @@ function updateBadge(langCode) {
     const badge = document.getElementById('header-badge');
     if (!badge) return;
     const parts = langCode.split('-');
-    const country = (parts[1] || parts[0]).toUpperCase();
-    badge.textContent = [...country].map(c => String.fromCodePoint(0x1F1E6 - 65 + c.charCodeAt(0))).join('');
+    badge.textContent = (parts[1] || parts[0]).toUpperCase();
 }
