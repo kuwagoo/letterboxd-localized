@@ -98,6 +98,12 @@ document.getElementById('language').addEventListener('change', () => {
     const lang = document.getElementById('language').value;
     chrome.storage.local.set({ language: lang });
     updateBadge(lang);
+    // Flash "✓ Saved"
+    const savedEl = document.getElementById('lang-saved');
+    if (savedEl) {
+        savedEl.style.opacity = '1';
+        setTimeout(() => { savedEl.style.opacity = '0'; }, 1000);
+    }
     chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
         if (tab?.id) chrome.tabs.sendMessage(tab.id, { action: 'applyLiveSetting', key: 'language', value: lang }).catch(() => {});
     });

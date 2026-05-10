@@ -433,9 +433,9 @@
         .opt-reload-tag {
             display: inline-block;
             font-size: 0.68rem;
-            color: #567;
-            background: #1a2028;
-            border: 1px solid #2c3440;
+            color: #f59e0b;
+            background: #271f00;
+            border: 1px solid rgba(245, 158, 11, 0.3);
             border-radius: 3px;
             padding: 0px 4px;
             margin-left: 4px;
@@ -484,6 +484,22 @@
 
         .cache-status.error {
             color: #ff8000;
+        }
+
+        /* Language row */
+        .lang-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #1e252d;
+        }
+
+        .lang-row label {
+            margin-bottom: 0;
+            font-size: 0.83rem;
+            color: #cdd;
         }
 
         /* OPTIONS TAB */
@@ -659,9 +675,10 @@
     <!-- OPTIONS TAB (default) -->
     <div id="tab-options" class="tab-content active">
         <div class="body">
-            <div class="form-group" style="margin-bottom:10px; max-width:280px;">
+            <div class="lang-row">
                 <label for="language">Display language</label>
-                <select id="language">
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <select id="language" style="width:220px;flex-shrink:0;">
                     <option value="ar-AE">Arabic (AR)</option>
                     <option value="be-BY">Belarusian (BY)</option>
                     <option value="bg-BG">Bulgarian (BG)</option>
@@ -721,7 +738,9 @@
                     <option value="zh-CN">Chinese Simplified (CN)</option>
                     <option value="zh-TW">Chinese Traditional (TW)</option>
                     <option value="zu-ZA">Zulu (ZA)</option>
-                </select>
+                    </select>
+                    <span id="lang-saved" style="font-size:0.78rem;color:#00e054;opacity:0;transition:opacity 0.3s;">✓ Saved</span>
+                </div>
             </div>
             <div class="opt-grid">
 
