@@ -700,19 +700,21 @@
                 <div class="step-num">4</div>
                 <div class="step-body">
                     <p>Copy the <strong>API Key (v3 auth)</strong> and paste it below:</p>
-                    <div class="input-row" style="margin-top:8px;">
-                        <input type="password" id="apiKey" placeholder="Paste your API key here…" spellcheck="false">
-                        <button class="toggle-visibility" id="toggleKey" title="Show / hide key">
-                            <svg id="icon-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-                            </svg>
-                            <svg id="icon-eye-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
-                            </svg>
-                        </button>
+                    <div style="display:flex;gap:8px;align-items:center;margin-top:8px;">
+                        <div class="input-row" style="flex:1;">
+                            <input type="password" id="apiKey" placeholder="Paste your API key here…" spellcheck="false">
+                            <button class="toggle-visibility" id="toggleKey" title="Show / hide key">
+                                <svg id="icon-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                <svg id="icon-eye-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="btn-save" id="save" style="flex-shrink:0;width:auto;padding:7px 16px;text-transform:none;font-weight:700;background:#00c945;letter-spacing:0.2px;">Save →</button>
                     </div>
                     <p class="onboarding-hint" id="onboarding-hint">👋 Paste your TMDB API key to get started</p>
-                    <button class="btn-save" id="save" style="max-width:100%;margin:10px 0 0;text-transform:none;font-weight:700;background:#00c945;letter-spacing:0.2px;">Save &amp; continue →</button>
                     <div id="status" class="status" style="text-align:left;"></div>
                 </div>
             </div>
